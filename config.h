@@ -62,8 +62,17 @@ static const char *dmenucmd[] = { "dmenu_run", "-b", "-m", dmenumon, "-fn", dmen
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *browser[]  = { "google-chrome-stable", NULL };
 
+/* Music Control */
+#include <X11/XF86keysym.h>
+static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
+static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ 0, XF86XK_AudioRaiseVolume,   	   spawn,          {.v = upvol } },
+	{ 0, XF86XK_AudioLowerVolume,   	   spawn,          {.v = downvol } },
+	{ 0, XF86XK_AudioMute,   	   	   spawn,          {.v = mutevol } },
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             		XK_t,	   spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      spawn,      	   {.v = browser } },
