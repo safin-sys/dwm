@@ -12,7 +12,17 @@ wth(){
   echo "$wth"
 }
 
+upd(){
+  upd=$(checkupdates | wc -l)
+  if [[ $upd -eq 0 ]]
+    then
+      echo ""
+    else
+      echo " $upd |"
+  fi
+}
+
 while true; do
-	xsetroot -name " $(wth) | $(dte) "
-	sleep 1m
+	xsetroot -name " $(upd) $(wth) | $(dte) "
+	sleep 30s
 done &
